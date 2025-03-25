@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador y Evaluador de Contraseñas Seguras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .password-info {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .strong {
+            color: green;
+        }
+
+        .weak {
+            color: red;
+        }
+
+        .medium {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Generador de Contraseñas Seguras</h1>
+        
+        <button onclick="generatePassword()">Generar Contraseña Segura</button>
+        
+        <div>
+            <input type="text" id="passwordInput" placeholder="Ingresa tu contraseña" oninput="checkPasswordStrength()">
+        </div>
+        
+        <div class="password-info">
+            <p id="passwordStrength"></p>
+            <ul id="passwordExplanation"></ul>
+        </div>
+    </div>
+
+    <script>
+        // Función para generar una contraseña segura
+        function generatePassword() {
+            const length = 12; // Longitud recomendada de la contraseña
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=<>?";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+            document.getElementById("passwordInput").value = password;
+            checkPasswordStrength();
